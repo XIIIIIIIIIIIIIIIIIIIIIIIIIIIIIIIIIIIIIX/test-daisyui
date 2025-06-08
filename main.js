@@ -1,10 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    html.setAttribute('data-theme', saved);
+  }
+
   const toggle = document.getElementById('theme-toggle');
   if (toggle) {
     toggle.addEventListener('click', () => {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      html.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+      const current = html.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
     });
   }
 
